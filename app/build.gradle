@@ -9,7 +9,8 @@ android {
 
     defaultConfig {
         applicationId "com.easy.view"
-        minSdkVersion 16
+        //为了使用 jetpack compose 所以最小SDK版本为21
+        minSdkVersion 21
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -25,11 +26,26 @@ android {
         }
     }
 
+
     // Butterknife requires Java 8.
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+    // JetPack Compose config
+//    buildFeatures {
+//        // Enables Jetpack Compose for this module
+//        compose true
+//    }
+//
+//    kotlinOptions {
+//        jvmTarget = "1.8"
+//    }
+//
+//    composeOptions {
+//        kotlinCompilerExtensionVersion "0.1.0-dev13"
+//    }
 }
 
 dependencies {
@@ -63,5 +79,13 @@ dependencies {
 
     implementation 'com.orhanobut:logger:2.2.0'
     implementation 'com.blankj:utilcodex:1.29.0'
+
+
+    //JetPack Compose dependencies
+    // You also need to include the following Compose toolkit dependencies.
+//    implementation 'androidx.ui:ui-core:0.1.0-dev13'
+//    implementation 'androidx.ui:ui-tooling:0.1.0-dev13'
+//    implementation 'androidx.ui:ui-layout:0.1.0-dev13'
+//    implementation 'androidx.ui:ui-material:0.1.0-dev13'
 
 }
