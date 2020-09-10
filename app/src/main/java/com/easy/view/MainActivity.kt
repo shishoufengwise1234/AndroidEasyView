@@ -27,6 +27,7 @@ class MainActivity : AppCompatActivity(), OnItemClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        supportActionBar?.hide()
 
         listAdapter = MainListAdapter(R.layout.item_text_view)
         listAdapter.adapterAnimation = SlideInBottomAnimation()
@@ -48,7 +49,22 @@ class MainActivity : AppCompatActivity(), OnItemClickListener {
         get() {
             val list: MutableList<StringItemBean> = ArrayList()
             list.add(StringItemBean(1, "Canvas绘制基本几何图形"))
-            list.add(StringItemBean(2, "JetPack Compose组件"))
+            list.add(StringItemBean(2, "Drawable 资源设置相关"))
+            list.add(StringItemBean(3, "Animation 集合"))
+            list.add(StringItemBean(4, "TextView 集合"))
+
+            list.add(StringItemBean(5, "ConstraintLayout 组件"))
+            list.add(StringItemBean(7, "Recyclerview 组件"))
+            list.add(StringItemBean(9, "Paging 组件"))
+            list.add(StringItemBean(11, "ViewPager2 组件"))
+            list.add(StringItemBean(14, "CardView 组件"))
+            list.add(StringItemBean(16, "CollapsingToolbarLayout 组件"))
+            list.add(StringItemBean(16, "CoordinatorLayout 组件"))
+
+            list.add(StringItemBean(30, "Fragment 集合"))
+            list.add(StringItemBean(34, "DataBinding 组件"))
+            list.add(StringItemBean(39, "ViewModel 组件"))
+            list.add(StringItemBean(80, "JetPack Compose组件 (环境目前不支持)"))
             return list
         }
 
@@ -58,11 +74,13 @@ class MainActivity : AppCompatActivity(), OnItemClickListener {
         }
         val id = mDataList[position].id
         val intent = Intent()
-        when (id) {
-            1 -> intent.setClass(this, CanvasGeometryActivity::class.java)
-            2 -> intent.setClass(this, CanvasGeometryActivity::class.java)
-            else -> intent.setClass(this, EmptyActivity::class.java)
+        val clazz:Class<*>
+        clazz = when (id) {
+            1 -> CanvasGeometryActivity::class.java
+
+            else -> EmptyActivity::class.java
         }
+        intent.setClass(this,clazz)
         startActivity(intent)
     }
 

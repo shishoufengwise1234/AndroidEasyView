@@ -13,7 +13,13 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:background="@color/colorPrimary"
+        app:tabIconTint="@color/mtrl_tabs_icon_color_selector_colored"
+        app:tabIndicatorColor="?attr/colorOnPrimary"
+        app:tabTextColor="@color/mtrl_tabs_icon_color_selector_colored"
+        app:tabRippleColor="@color/mtrl_tabs_colored_ripple_color"
         tools:background="@android:color/holo_blue_light" />
+
 
     <androidx.viewpager.widget.ViewPager
         android:layout_width="match_parent"
