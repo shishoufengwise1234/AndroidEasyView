@@ -2,9 +2,14 @@ package com.easy.view
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleObserver
+import androidx.lifecycle.OnLifecycleEvent
+import androidx.lifecycle.ProcessLifecycleOwner
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.chad.library.adapter.base.BaseQuickAdapter
@@ -14,6 +19,7 @@ import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.easy.view.bean.StringItemBean
 import com.easy.view.canvas.CanvasGeometryActivity
 import com.google.android.material.textview.MaterialTextView
+import com.orhanobut.logger.Logger
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 
@@ -43,6 +49,29 @@ class MainActivity : AppCompatActivity(), OnItemClickListener {
             recycler_list.addItemDecoration(DividerItemDecoration(this, LinearLayout.VERTICAL))
         }
 
+        //注册监听前后台切换
+        ProcessLifecycleOwner.get().lifecycle.addObserver(ApplicationObserver())
+
+    }
+
+    class ApplicationObserver : LifecycleObserver {
+
+        private val TAG = "ApplicationObserver"
+
+        @OnLifecycleEvent(Lifecycle.Event.ON_START)
+        fun onForeground() {
+            Log.d(TAG, "onForeground: ")
+        }
+
+        @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
+        fun onResumed(){
+            Log.d(TAG, "onResumed: 活跃中...")
+        }
+
+        @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
+        fun onBackground() {
+            Log.d(TAG, "onBackground: ")
+        }
     }
 
     private val mainItemList: List<StringItemBean>
