@@ -26,6 +26,29 @@
             android:name=".EmptyActivity"
             android:label="@string/label_currency"
             android:screenOrientation="sensor" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <activity
+            android:name=".scope.ScopeMainActivity"
+            android:label="@string/label_currency"
+            android:screenOrientation="sensor" />
     </application>
 
 </manifest>
