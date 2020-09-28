@@ -18,9 +18,11 @@ import com.chad.library.adapter.base.listener.OnItemClickListener
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.easy.view.bean.StringItemBean
 import com.easy.view.canvas.CanvasGeometryActivity
+import com.easy.view.scope.ScopeMainActivity
 import com.google.android.material.textview.MaterialTextView
 import com.orhanobut.logger.Logger
 import kotlinx.android.synthetic.main.activity_main.*
+import java.lang.Exception
 import java.util.*
 
 
@@ -74,6 +76,14 @@ class MainActivity : AppCompatActivity(), OnItemClickListener {
         }
     }
 
+    override fun onResume() {
+        try {
+            super.onResume()
+        }catch (e: Exception){
+            e.printStackTrace()
+        }
+    }
+
     private val mainItemList: List<StringItemBean>
         get() {
             val list: MutableList<StringItemBean> = ArrayList()
@@ -93,6 +103,7 @@ class MainActivity : AppCompatActivity(), OnItemClickListener {
             list.add(StringItemBean(30, "Fragment 集合"))
             list.add(StringItemBean(34, "DataBinding 组件"))
             list.add(StringItemBean(39, "ViewModel 组件"))
+            list.add(StringItemBean(42, "Kotlin 协程"))
             list.add(StringItemBean(80, "JetPack Compose组件 (环境目前不支持)"))
             return list
         }
@@ -106,6 +117,8 @@ class MainActivity : AppCompatActivity(), OnItemClickListener {
         val clazz:Class<*>
         clazz = when (id) {
             1 -> CanvasGeometryActivity::class.java
+
+            42 -> ScopeMainActivity::class.java
 
             else -> EmptyActivity::class.java
         }
@@ -126,4 +139,6 @@ class MainActivity : AppCompatActivity(), OnItemClickListener {
     internal class MainItemViewHolder(view: View) : BaseViewHolder(view) {
         var textView: MaterialTextView? = R.id.tv_text_view_item.findView()
     }
+
+
 }

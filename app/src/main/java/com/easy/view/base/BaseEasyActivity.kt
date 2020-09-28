@@ -1,6 +1,7 @@
 package com.easy.view.base
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import butterknife.ButterKnife
 import butterknife.Unbinder
@@ -13,7 +14,7 @@ import butterknife.Unbinder
  *
  *
  */
-abstract class BaseEasyActivity : AppCompatActivity() {
+abstract class BaseEasyActivity : AppCompatActivity(),View.OnClickListener {
 
     private  var unBinder : Unbinder? = null
 
@@ -32,10 +33,20 @@ abstract class BaseEasyActivity : AppCompatActivity() {
     abstract fun initView()
 
 
+    override fun onClick(v: View?) {
+        onViewsClick(v?.id)
+    }
+
+    open fun onViewsClick(id: Int?){
+        
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         unBinder?.unbind()
 
 
     }
+
+
 }
