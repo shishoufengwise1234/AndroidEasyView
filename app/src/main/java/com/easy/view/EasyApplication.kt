@@ -48,7 +48,7 @@ class EasyLifecycleCallBack : Application.ActivityLifecycleCallbacks{
     override fun onActivityResumed(activity: Activity) {
         Logger.i("onActivityResumed() activity = $activity")
 
-        throw NullPointerException("resume is null")
+//        throw NullPointerException("resume is null")
     }
 
     override fun onActivityPaused(activity: Activity) {
