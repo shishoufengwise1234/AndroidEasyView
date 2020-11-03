@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="ListContentView">
+        <attr name="listManager" format="enum">
+            <enum name="linearLayout" value="1" />
+            <enum name="gridLayout" value="2" />
+        </attr>
+        <attr name="gridManagerCount" format="integer" />
+    </declare-styleable>
+
+</resources>

@@ -1,7 +1,11 @@
 package com.easy.view.animator
 
-import com.easy.view.R
-import com.easy.view.base.BaseEasyActivity
+import android.content.Intent
+import android.view.View
+import com.chad.library.adapter.base.BaseQuickAdapter
+import com.easy.view.EmptyActivity
+import com.easy.view.animator.activity.AnimatorTestActivity
+import com.easy.view.base.BaseEasyListActivity
 
 /**
  * Created by shishoufeng on 2020/10/26.
@@ -10,12 +14,19 @@ import com.easy.view.base.BaseEasyActivity
  * desc: 动画主界面
  *
  */
-class AnimationMainActivity : BaseEasyActivity(){
-    override fun getLayoutId(): Int {
-        return R.layout.layout_recycler_list
+class AnimationMainActivity : BaseEasyListActivity() {
+
+    override fun getContentList(): MutableList<String> {
+        return arrayListOf("Activity 转场动画")
     }
 
-    override fun initView() {
-        TODO("Not yet implemented")
+    override fun onItemClick(adapter: BaseQuickAdapter<*, *>, view: View, position: Int) {
+        val intent = Intent()
+        val clazz = when (position) {
+            0 -> AnimatorTestActivity::class.java
+
+            else -> EmptyActivity::class.java
+        }
+        startActivity(intent.setClass(this@AnimationMainActivity,clazz))
     }
 }

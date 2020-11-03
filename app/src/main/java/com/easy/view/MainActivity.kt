@@ -1,6 +1,7 @@
 package com.easy.view
 
 import android.content.Intent
+import android.content.res.Configuration
 import android.net.Uri
 import android.os.Bundle
 import android.text.TextUtils
@@ -30,6 +31,10 @@ import java.util.*
 
 class MainActivity : AppCompatActivity(), OnItemClickListener {
 
+    companion object{
+        private const val TAG = "MainActivity"
+    }
+
     private lateinit var listAdapter: MainListAdapter
     private lateinit var mDataList: List<StringItemBean>
 
@@ -55,6 +60,17 @@ class MainActivity : AppCompatActivity(), OnItemClickListener {
 
         //注册监听前后台切换
         ProcessLifecycleOwner.get().lifecycle.addObserver(ApplicationObserver())
+
+    }
+
+    override fun getLastNonConfigurationInstance(): Any? {
+        Log.d(TAG, "getLastNonConfigurationInstance: ")
+        return super.getLastNonConfigurationInstance()
+    }
+
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+        Log.d(TAG, "getLastNonConfigurationInstance: ")
 
     }
 
