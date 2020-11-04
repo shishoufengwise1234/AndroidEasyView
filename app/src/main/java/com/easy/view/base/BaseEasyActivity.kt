@@ -16,6 +16,8 @@ import butterknife.Unbinder
  */
 abstract class BaseEasyActivity : AppCompatActivity(),View.OnClickListener {
 
+    protected val LOG_TAG: String = this.javaClass.simpleName
+
     private  var unBinder : Unbinder? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {

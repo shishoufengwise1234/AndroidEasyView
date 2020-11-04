@@ -1,10 +1,14 @@
 package com.easy.view
 
 import android.content.Intent
+import android.content.res.Configuration
+import android.net.Uri
 import android.os.Bundle
+import android.text.TextUtils
 import android.util.Log
 import android.view.View
 import android.widget.LinearLayout
+import androidx.annotation.NonNull
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
@@ -16,17 +20,20 @@ import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.animation.SlideInBottomAnimation
 import com.chad.library.adapter.base.listener.OnItemClickListener
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
+import com.easy.view.animator.AnimationMainActivity
 import com.easy.view.bean.StringItemBean
 import com.easy.view.canvas.CanvasGeometryActivity
 import com.easy.view.scope.ScopeMainActivity
 import com.google.android.material.textview.MaterialTextView
-import com.orhanobut.logger.Logger
 import kotlinx.android.synthetic.main.activity_main.*
-import java.lang.Exception
 import java.util.*
 
 
 class MainActivity : AppCompatActivity(), OnItemClickListener {
+
+    companion object{
+        private const val TAG = "MainActivity"
+    }
 
     private lateinit var listAdapter: MainListAdapter
     private lateinit var mDataList: List<StringItemBean>
@@ -53,6 +60,17 @@ class MainActivity : AppCompatActivity(), OnItemClickListener {
 
         //注册监听前后台切换
         ProcessLifecycleOwner.get().lifecycle.addObserver(ApplicationObserver())
+
+    }
+
+    override fun getLastNonConfigurationInstance(): Any? {
+        Log.d(TAG, "getLastNonConfigurationInstance: ")
+        return super.getLastNonConfigurationInstance()
+    }
+
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+        Log.d(TAG, "getLastNonConfigurationInstance: ")
 
     }
 
@@ -118,11 +136,13 @@ class MainActivity : AppCompatActivity(), OnItemClickListener {
         clazz = when (id) {
             1 -> CanvasGeometryActivity::class.java
 
+            3 -> AnimationMainActivity::class.java
+
             42 -> ScopeMainActivity::class.java
 
             else -> EmptyActivity::class.java
         }
-        intent.setClass(this,clazz)
+        intent.setClass(this, clazz)
         startActivity(intent)
     }
 
@@ -132,7 +152,7 @@ class MainActivity : AppCompatActivity(), OnItemClickListener {
             holder: MainItemViewHolder,
             item: StringItemBean
         ) {
-            holder.textView!!.text = item.text
+            holder.textView?.text = item.text
         }
     }
 
