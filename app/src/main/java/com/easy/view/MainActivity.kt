@@ -20,6 +20,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.animation.SlideInBottomAnimation
 import com.chad.library.adapter.base.listener.OnItemClickListener
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
+import com.easy.view.activities.ActivitiesMainActivity
 import com.easy.view.animator.AnimationMainActivity
 import com.easy.view.bean.StringItemBean
 import com.easy.view.canvas.CanvasGeometryActivity
@@ -118,6 +119,8 @@ class MainActivity : AppCompatActivity(), OnItemClickListener {
             list.add(StringItemBean(16, "CollapsingToolbarLayout 组件"))
             list.add(StringItemBean(16, "CoordinatorLayout 组件"))
 
+
+            list.add(StringItemBean(29, "Activity 集合"))
             list.add(StringItemBean(30, "Fragment 集合"))
             list.add(StringItemBean(34, "DataBinding 组件"))
             list.add(StringItemBean(39, "ViewModel 组件"))
@@ -137,6 +140,7 @@ class MainActivity : AppCompatActivity(), OnItemClickListener {
             1 -> CanvasGeometryActivity::class.java
 
             3 -> AnimationMainActivity::class.java
+            29 -> ActivitiesMainActivity::class.java
 
             42 -> ScopeMainActivity::class.java
 

@@ -26,8 +26,6 @@ abstract class BaseFragment : Fragment() {
 
     private lateinit var mContentView:View
 
-    private  var unBinder : Unbinder? = null
-
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -49,11 +47,14 @@ abstract class BaseFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         mContentView = layoutInflater.inflate(getLayoutId(),container,false)
-        unBinder = ButterKnife.bind(this,mContentView)
-
-        initView()
 
         return mContentView
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+        initView()
     }
 
     abstract fun getLayoutId(): Int
@@ -86,7 +87,6 @@ abstract class BaseFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        unBinder?.unbind()
 
         Logger.i(TAG," ： onDestroyView()")
     }
