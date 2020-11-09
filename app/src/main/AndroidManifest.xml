@@ -31,6 +31,14 @@
             android:name=".animator.activity.EasyFinishActivity"
             android:label="@string/label_currency"
             android:screenOrientation="sensor" />
+        <activity
+            android:name=".activities.ActivitiesMainActivity"
+            android:label="@string/label_currency"
+            android:screenOrientation="sensor" />
+        <activity
+            android:name=".activities.backpressed.BackMainActivity"
+            android:label="@string/label_currency"
+            android:screenOrientation="sensor" />
 
 
 
