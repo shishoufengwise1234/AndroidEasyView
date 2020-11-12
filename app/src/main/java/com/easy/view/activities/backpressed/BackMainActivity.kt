@@ -24,13 +24,6 @@ class BackMainActivity : BaseEasyActivity() {
 
     }
 
-    val backViewModel = viewModels<BackViewModel> {
-        ViewModelProvider.AndroidViewModelFactory.getInstance(application)
-    }
-
-    val viewModel: BackViewModel by viewModels()
-    //或
-    val viewModel2 by viewModels<BackViewModel>()
 
     override fun getLayoutId(): Int {
         return R.layout.activity_jetpack_back_main
@@ -44,10 +37,6 @@ class BackMainActivity : BaseEasyActivity() {
 
 
 
-        val viewModel = ViewModelProvider(
-            this,
-            ViewModelProvider.AndroidViewModelFactory.getInstance(application)
-        ).get(BackViewModel::class.java)
 
 
 

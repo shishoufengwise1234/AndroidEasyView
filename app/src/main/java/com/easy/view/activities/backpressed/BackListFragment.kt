@@ -47,19 +47,6 @@ class BackListFragment : BaseEasyListFragment() {
             }
         })
 
-        requireActivity().onBackPressedDispatcher.addCallback(this,true,{
-            Logger.i("OnBackPressedDispatcher")
-
-        })
-
-        //添加返回回调
-        requireActivity().onBackPressedDispatcher.addCallback(owner = this,enabled = true,{
-            //...
-        })
-        requireActivity().onBackPressedDispatcher.addCallback(onBackPressed = {
-            //...
-        })
-
     }
 
     private fun back2() {
