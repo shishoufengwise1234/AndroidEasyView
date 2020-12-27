@@ -24,6 +24,8 @@ import com.easy.view.activities.ActivitiesMainActivity
 import com.easy.view.animator.AnimationMainActivity
 import com.easy.view.bean.StringItemBean
 import com.easy.view.canvas.CanvasGeometryActivity
+import com.easy.view.hilt.HiltMainActivity
+import com.easy.view.lifecycle.MainLifecycleActivity
 import com.easy.view.scope.ScopeMainActivity
 import com.google.android.material.textview.MaterialTextView
 import kotlinx.android.synthetic.main.activity_main.*
@@ -123,9 +125,14 @@ class MainActivity : AppCompatActivity(), OnItemClickListener {
             list.add(StringItemBean(29, "Activity 集合"))
             list.add(StringItemBean(30, "Fragment 集合"))
             list.add(StringItemBean(34, "DataBinding 组件"))
+            list.add(StringItemBean(37, "Lifecycle 组件"))
+
             list.add(StringItemBean(39, "ViewModel 组件"))
             list.add(StringItemBean(42, "Kotlin 协程"))
+            list.add(StringItemBean(79, "Hilt 注入"))
             list.add(StringItemBean(80, "JetPack Compose组件 (环境目前不支持)"))
+            list.add(StringItemBean(90, "Glide加载图片测试 "))
+
             return list
         }
 
@@ -142,7 +149,10 @@ class MainActivity : AppCompatActivity(), OnItemClickListener {
             3 -> AnimationMainActivity::class.java
             29 -> ActivitiesMainActivity::class.java
 
+            37 -> MainLifecycleActivity::class.java
             42 -> ScopeMainActivity::class.java
+            79 -> HiltMainActivity::class.java
+            90 -> GlideTestActivity::class.java
 
             else -> EmptyActivity::class.java
         }

@@ -1,8 +1,6 @@
 package com.easy.view.activities.backpressed
 
 import android.app.Application
-import androidx.activity.OnBackPressedDispatcher
-import androidx.activity.addCallback
 import androidx.activity.viewModels
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -19,18 +17,21 @@ import com.orhanobut.logger.Logger
  */
 class BackMainActivity : BaseEasyActivity() {
 
-
     class BackViewModel(application: Application) : AndroidViewModel(application) {
 
+        //...
+
     }
 
-    val backViewModel = viewModels<BackViewModel> {
-        ViewModelProvider.AndroidViewModelFactory.getInstance(application)
+    val s by lazy(LazyThreadSafetyMode.NONE) {
+        println("ss")
+        "abc"
     }
 
-    val viewModel: BackViewModel by viewModels()
+    val backViewModel : BackViewModel by viewModels()
     //或
-    val viewModel2 by viewModels<BackViewModel>()
+    val viewModel by viewModels<BackViewModel>()
+
 
     override fun getLayoutId(): Int {
         return R.layout.activity_jetpack_back_main
@@ -43,11 +44,11 @@ class BackMainActivity : BaseEasyActivity() {
             .commitNowAllowingStateLoss()
 
 
+        val viewModel =
+            ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory(application)).get(
+                BackViewModel::class.java
+            )
 
-        val viewModel = ViewModelProvider(
-            this,
-            ViewModelProvider.AndroidViewModelFactory.getInstance(application)
-        ).get(BackViewModel::class.java)
 
 
 
