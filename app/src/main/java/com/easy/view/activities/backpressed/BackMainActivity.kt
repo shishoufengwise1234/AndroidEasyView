@@ -1,5 +1,10 @@
 package com.easy.view.activities.backpressed
 
+import android.app.Application
+import androidx.activity.viewModels
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.ViewModelProvider
+import com.easy.view.EasyApplication
 import com.easy.view.R
 import com.easy.view.base.BaseEasyActivity
 import com.orhanobut.logger.Logger
@@ -12,6 +17,20 @@ import com.orhanobut.logger.Logger
  */
 class BackMainActivity : BaseEasyActivity() {
 
+    class BackViewModel(application: Application) : AndroidViewModel(application) {
+
+        //...
+
+    }
+
+    val s by lazy(LazyThreadSafetyMode.NONE) {
+        println("ss")
+        "abc"
+    }
+
+    val backViewModel : BackViewModel by viewModels()
+    //或
+    val viewModel by viewModels<BackViewModel>()
 
 
     override fun getLayoutId(): Int {
@@ -25,6 +44,10 @@ class BackMainActivity : BaseEasyActivity() {
             .commitNowAllowingStateLoss()
 
 
+        val viewModel =
+            ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory(application)).get(
+                BackViewModel::class.java
+            )
 
 
 

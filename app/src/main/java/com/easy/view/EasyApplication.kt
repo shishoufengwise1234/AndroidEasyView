@@ -5,6 +5,7 @@ import android.app.Application
 import android.os.Bundle
 import com.easy.view.utils.EASY_VIEW_TAG
 import com.orhanobut.logger.*
+import dagger.hilt.android.HiltAndroidApp
 import java.lang.NullPointerException
 
 /**
@@ -14,6 +15,7 @@ import java.lang.NullPointerException
  *
  * desc: application 初始化
  */
+@HiltAndroidApp
 class EasyApplication : Application() {
 
     override fun onCreate() {

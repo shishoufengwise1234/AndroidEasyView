@@ -46,6 +46,10 @@ class BackListFragment : BaseEasyListFragment() {
                 back2()
             }
         })
+        requireActivity().onBackPressedDispatcher.addCallback(owner = this,enabled = true){
+
+        }
+        requireActivity()
 
     }
 
