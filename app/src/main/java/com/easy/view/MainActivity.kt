@@ -24,6 +24,7 @@ import com.easy.view.activities.ActivitiesMainActivity
 import com.easy.view.animator.AnimationMainActivity
 import com.easy.view.bean.StringItemBean
 import com.easy.view.canvas.CanvasGeometryActivity
+import com.easy.view.canvas.CanvasSimpleActivity
 import com.easy.view.hilt.HiltMainActivity
 import com.easy.view.lifecycle.MainLifecycleActivity
 import com.easy.view.scope.ScopeMainActivity
@@ -144,7 +145,8 @@ class MainActivity : AppCompatActivity(), OnItemClickListener {
         val intent = Intent()
         val clazz:Class<*>
         clazz = when (id) {
-            1 -> CanvasGeometryActivity::class.java
+//            1 -> CanvasGeometryActivity::class.java
+            1 -> CanvasSimpleActivity::class.java
 
             3 -> AnimationMainActivity::class.java
             29 -> ActivitiesMainActivity::class.java
