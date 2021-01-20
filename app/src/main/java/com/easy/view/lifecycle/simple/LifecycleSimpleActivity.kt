@@ -1,6 +1,7 @@
 package com.easy.view.lifecycle.simple
 
 import androidx.activity.viewModels
+import androidx.lifecycle.observe
 import com.easy.view.R
 import com.easy.view.base.BaseEasyActivity
 import com.easy.view.lifecycle.simple.vm.LifecycleSimpleViewModel

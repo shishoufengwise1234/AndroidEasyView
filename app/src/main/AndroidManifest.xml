@@ -28,6 +28,10 @@
             android:label="@string/label_currency"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".canvas.CanvasSimpleActivity"
+            android:label="@string/label_currency"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".EmptyActivity"
             android:label="@string/label_currency"
             android:screenOrientation="sensor" />
@@ -77,6 +81,10 @@
             android:screenOrientation="sensor"
             />
         <activity android:name=".lifecycle.MainLifecycleActivity"
+            android:label="@string/label_currency"
+            android:screenOrientation="sensor"
+            />
+        <activity android:name=".lifecycle.event.LifecycleEventActivity"
             android:label="@string/label_currency"
             android:screenOrientation="sensor"
             />

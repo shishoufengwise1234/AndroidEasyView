@@ -5,6 +5,7 @@ import android.view.View
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.easy.view.EmptyActivity
 import com.easy.view.base.BaseEasyListActivity
+import com.easy.view.lifecycle.event.LifecycleEventActivity
 import com.easy.view.lifecycle.simple.LifecycleSimpleActivity
 
 /**
@@ -19,14 +20,15 @@ class MainLifecycleActivity : BaseEasyListActivity() {
 
 
     override fun getContentList(): MutableList<String> {
-        return arrayListOf("与ViewModel、LiveData搭配简单示例")
+        return arrayListOf("Lifecycle 生命周期Demo","与ViewModel、LiveData搭配简单示例")
     }
 
     override fun onItemClick(adapter: BaseQuickAdapter<*, *>, view: View, position: Int) {
         startActivity(
             Intent(
                 this, when (position) {
-                    0 -> LifecycleSimpleActivity::class.java
+                    0 -> LifecycleEventActivity::class.java
+                    1 -> LifecycleSimpleActivity::class.java
                     else -> {
                         EmptyActivity::class.java
                     }
