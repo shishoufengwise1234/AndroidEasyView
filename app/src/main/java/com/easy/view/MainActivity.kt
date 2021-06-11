@@ -2,13 +2,10 @@ package com.easy.view
 
 import android.content.Intent
 import android.content.res.Configuration
-import android.net.Uri
 import android.os.Bundle
-import android.text.TextUtils
 import android.util.Log
 import android.view.View
 import android.widget.LinearLayout
-import androidx.annotation.NonNull
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
@@ -23,13 +20,13 @@ import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.easy.view.activities.ActivitiesMainActivity
 import com.easy.view.animator.AnimationMainActivity
 import com.easy.view.bean.StringItemBean
-import com.easy.view.canvas.CanvasGeometryActivity
 import com.easy.view.canvas.CanvasSimpleActivity
+import com.easy.view.databinding.ActivityMainBinding
 import com.easy.view.hilt.HiltMainActivity
 import com.easy.view.lifecycle.MainLifecycleActivity
 import com.easy.view.scope.ScopeMainActivity
+import com.easy.view.sp.SpAnrTestActivity
 import com.google.android.material.textview.MaterialTextView
-import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 
 
@@ -42,10 +39,12 @@ class MainActivity : AppCompatActivity(), OnItemClickListener {
     private lateinit var listAdapter: MainListAdapter
     private lateinit var mDataList: List<StringItemBean>
 
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         supportActionBar?.hide()
 
         listAdapter = MainListAdapter(R.layout.item_text_view)
@@ -56,10 +55,10 @@ class MainActivity : AppCompatActivity(), OnItemClickListener {
         listAdapter.setList(mDataList)
         listAdapter.setOnItemClickListener(this)
 
-        recycler_list.let {
-            recycler_list.layoutManager = LinearLayoutManager(this)
-            recycler_list.adapter = listAdapter
-            recycler_list.addItemDecoration(DividerItemDecoration(this, LinearLayout.VERTICAL))
+        binding.recyclerList.let {
+            it.layoutManager = LinearLayoutManager(this)
+            it.adapter = listAdapter
+            it.addItemDecoration(DividerItemDecoration(this, LinearLayout.VERTICAL))
         }
 
         //注册监听前后台切换
@@ -133,6 +132,7 @@ class MainActivity : AppCompatActivity(), OnItemClickListener {
             list.add(StringItemBean(79, "Hilt 注入"))
             list.add(StringItemBean(80, "JetPack Compose组件 (环境目前不支持)"))
             list.add(StringItemBean(90, "Glide加载图片测试 "))
+            list.add(StringItemBean(91, "8.0以下SP ANR 问题测试"))
 
             return list
         }
@@ -155,6 +155,7 @@ class MainActivity : AppCompatActivity(), OnItemClickListener {
             42 -> ScopeMainActivity::class.java
             79 -> HiltMainActivity::class.java
             90 -> GlideTestActivity::class.java
+            91 -> SpAnrTestActivity::class.java
 
             else -> EmptyActivity::class.java
         }

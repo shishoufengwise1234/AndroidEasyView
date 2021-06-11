@@ -5,21 +5,17 @@ import android.content.res.TypedArray
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.LinearLayout
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.chad.library.adapter.base.BaseBinderAdapter
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.listener.OnItemClickListener
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.easy.view.R
+import com.easy.view.databinding.LayoutRecyclerListBinding
 import com.google.android.material.textview.MaterialTextView
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.layout_recycler_list.view.*
 
 /**
  * Created by shishoufeng on 2020/10/26.
@@ -35,15 +31,14 @@ class ListContentView @JvmOverloads constructor(
 ) : FrameLayout(mContext, attributeSet, defStyleAttribute) {
 
     private var mAdapter: ListContentAdapter
+    private var binding = LayoutRecyclerListBinding.inflate(LayoutInflater.from(mContext),this,true)
 
     init {
-        LayoutInflater.from(mContext).inflate(R.layout.layout_recycler_list, this, true)
-
         var typedArray: TypedArray? = null
         try {
             typedArray = mContext.obtainStyledAttributes(R.styleable.ListContentView)
 
-            recycler_list.layoutManager =
+            binding.recyclerList.layoutManager =
                 when (typedArray.getInt(R.styleable.ListContentView_listManager, 1)) {
                     2 -> GridLayoutManager(
                         mContext,
@@ -56,9 +51,9 @@ class ListContentView @JvmOverloads constructor(
         }
 
         mAdapter = ListContentAdapter()
-        recycler_list.addItemDecoration(DividerItemDecoration(mContext, LinearLayout.VERTICAL))
+        binding.recyclerList.addItemDecoration(DividerItemDecoration(mContext, LinearLayout.VERTICAL))
 
-        recycler_list.adapter = mAdapter
+        binding.recyclerList.adapter = mAdapter
 
 
     }

@@ -1,14 +1,13 @@
 package com.easy.view.scope
 
-import android.annotation.SuppressLint
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.blankj.utilcode.util.ToastUtils
 import com.easy.view.R
 import com.easy.view.base.BaseEasyActivity
+import com.easy.view.databinding.ActivityMainScopeBinding
 import com.easy.view.utils.logCurrentThread
 import com.orhanobut.logger.Logger
-import kotlinx.android.synthetic.main.activity_main_scope.*
 import kotlinx.coroutines.*
 
 /**
@@ -17,13 +16,12 @@ import kotlinx.coroutines.*
  *
  * desc: 协程测试主界面
  */
-class ScopeMainActivity : BaseEasyActivity() {
+class ScopeMainActivity : BaseEasyActivity<ActivityMainScopeBinding>() {
 
     private lateinit var viewModel: ScopeMainViewModel
 
-    override fun getLayoutId(): Int {
-        return R.layout.activity_main_scope
-    }
+    override val binding: ActivityMainScopeBinding
+        get() = ActivityMainScopeBinding.inflate(layoutInflater)
 
     override fun initView() {
         viewModel = ViewModelProvider(this,ViewModelProvider.AndroidViewModelFactory.getInstance(application))
@@ -37,8 +35,8 @@ class ScopeMainActivity : BaseEasyActivity() {
         })
 
 
-        btnScopeSwitchThread.setOnClickListener(this)
-        btnScopeViewModelSimple.setOnClickListener(this)
+        binding.btnScopeSwitchThread.setOnClickListener(this)
+        binding.btnScopeViewModelSimple.setOnClickListener(this)
 
 
     }

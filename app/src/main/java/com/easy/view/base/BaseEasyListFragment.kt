@@ -2,7 +2,8 @@ package com.easy.view.base
 
 import com.chad.library.adapter.base.listener.OnItemClickListener
 import com.easy.view.R
-import kotlinx.android.synthetic.main.layout_list_content_view.*
+import com.easy.view.base.view.ListContentView
+import com.easy.view.databinding.LayoutListContentViewBinding
 
 /**
  * Created by shishoufeng on 2020/11/6.
@@ -18,6 +19,7 @@ abstract class BaseEasyListFragment : BaseFragment(), OnItemClickListener {
     }
 
     override fun initView() {
+        val listContentView = mContentView.findViewById<ListContentView>(R.id.listContentView)
         listContentView?.setData(getContentList())
         listContentView?.setOnItemClickListener(this@BaseEasyListFragment)
     }

@@ -4,9 +4,9 @@ import android.app.Application
 import androidx.activity.viewModels
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.easy.view.EasyApplication
 import com.easy.view.R
 import com.easy.view.base.BaseEasyActivity
+import com.easy.view.databinding.ActivityJetpackBackMainBinding
 import com.orhanobut.logger.Logger
 
 /**
@@ -15,7 +15,10 @@ import com.orhanobut.logger.Logger
  *
  * desc: 返回主界面demo
  */
-class BackMainActivity : BaseEasyActivity() {
+class BackMainActivity : BaseEasyActivity<ActivityJetpackBackMainBinding>() {
+
+    override val binding: ActivityJetpackBackMainBinding
+        get() = ActivityJetpackBackMainBinding.inflate(layoutInflater)
 
     class BackViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -32,10 +35,6 @@ class BackMainActivity : BaseEasyActivity() {
     //或
     val viewModel by viewModels<BackViewModel>()
 
-
-    override fun getLayoutId(): Int {
-        return R.layout.activity_jetpack_back_main
-    }
 
     override fun initView() {
 

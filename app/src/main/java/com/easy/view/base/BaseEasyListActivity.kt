@@ -1,8 +1,7 @@
 package com.easy.view.base
 
 import com.chad.library.adapter.base.listener.OnItemClickListener
-import com.easy.view.R
-import kotlinx.android.synthetic.main.layout_list_content_view.*
+import com.easy.view.databinding.LayoutListContentViewBinding
 
 /**
  * Created by shishoufeng on 2020/10/26.
@@ -11,15 +10,14 @@ import kotlinx.android.synthetic.main.layout_list_content_view.*
  * desc: 简单列表页面
  *
  */
-abstract class BaseEasyListActivity : BaseEasyActivity(), OnItemClickListener {
+abstract class BaseEasyListActivity : BaseEasyActivity<LayoutListContentViewBinding>(), OnItemClickListener {
 
-    override fun getLayoutId(): Int {
-        return R.layout.layout_list_content_view
-    }
+    override val binding: LayoutListContentViewBinding
+        get() = LayoutListContentViewBinding.inflate(layoutInflater)
 
     override fun initView() {
-        listContentView?.setData(getContentList())
-        listContentView?.setOnItemClickListener(this@BaseEasyListActivity)
+        binding.listContentView.setData(getContentList())
+        binding.listContentView.setOnItemClickListener(this@BaseEasyListActivity)
     }
 
 

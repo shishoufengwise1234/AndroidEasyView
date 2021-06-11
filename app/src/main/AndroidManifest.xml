@@ -88,6 +88,10 @@
             android:label="@string/label_currency"
             android:screenOrientation="sensor"
             />
+        <activity android:name=".sp.SpAnrTestActivity"
+            android:label="@string/label_currency"
+            android:screenOrientation="sensor"
+            />
 
 
 
