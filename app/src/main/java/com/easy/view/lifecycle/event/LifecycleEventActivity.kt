@@ -3,9 +3,8 @@ package com.easy.view.lifecycle.event
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.LifecycleOwner
-import com.easy.view.R
 import com.easy.view.base.BaseEasyActivity
-import kotlinx.android.synthetic.main.activity_lifecycle_event.*
+import com.easy.view.databinding.ActivityLifecycleEventBinding
 
 /**
  * Created by shishoufeng on 2021/1/6.
@@ -15,15 +14,14 @@ import kotlinx.android.synthetic.main.activity_lifecycle_event.*
  *
  *
  */
-class LifecycleEventActivity : BaseEasyActivity() {
+class LifecycleEventActivity : BaseEasyActivity<ActivityLifecycleEventBinding>() {
 
     private val sb = StringBuilder()
     private val simpleEvent = SimpleEvent()
 
+    override val binding: ActivityLifecycleEventBinding
+        get() = ActivityLifecycleEventBinding.inflate(layoutInflater)
 
-    override fun getLayoutId(): Int {
-        return R.layout.activity_lifecycle_event
-    }
 
     override fun initView() {
 
@@ -55,7 +53,7 @@ class LifecycleEventActivity : BaseEasyActivity() {
 //            Logger.i("event : ${event.name}")
             sb.append(event.name).append("\n")
 
-            tvEventContent?.text = sb
+            binding.tvEventContent.text = sb
         }
 
     }

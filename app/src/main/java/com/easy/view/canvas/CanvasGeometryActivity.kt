@@ -2,12 +2,11 @@ package com.easy.view.canvas
 
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
-import com.easy.view.R
 import com.easy.view.base.BaseEasyActivity
 import com.easy.view.base.BaseFragmentStateAdapter
 import com.easy.view.canvas.geometry.CustomTriangleFragment
+import com.easy.view.databinding.ActivityCanvasGeometrySimpleBinding
 import com.google.android.material.tabs.TabLayout
-import kotlinx.android.synthetic.main.activity_canvas_geometry_simple.*
 import java.util.*
 
 /**
@@ -17,19 +16,18 @@ import java.util.*
  *
  * desc:  canvas 绘制基本几何图形
  */
-class CanvasGeometryActivity : BaseEasyActivity() {
+class CanvasGeometryActivity : BaseEasyActivity<ActivityCanvasGeometrySimpleBinding>() {
 
     private lateinit var tabLayout: TabLayout
     private lateinit var viewPager: ViewPager
 
-    override fun getLayoutId(): Int {
-        return R.layout.activity_canvas_geometry_simple
-    }
+    override val binding: ActivityCanvasGeometrySimpleBinding
+        get() = ActivityCanvasGeometrySimpleBinding.inflate(layoutInflater)
 
     override fun initView() {
 
-        tabLayout = tab_layout
-        viewPager = view_pager
+        tabLayout = binding.tabLayout
+        viewPager = binding.viewPager
 
         tabLayout.setupWithViewPager(viewPager, true)
 

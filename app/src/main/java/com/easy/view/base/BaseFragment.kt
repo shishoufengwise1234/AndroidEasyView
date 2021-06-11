@@ -6,8 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import butterknife.ButterKnife
-import butterknife.Unbinder
 import com.orhanobut.logger.Logger
 
 /**
@@ -24,7 +22,7 @@ abstract class BaseFragment : Fragment() {
 
     private var mContext:Context? = null
 
-    private lateinit var mContentView:View
+    protected lateinit var mContentView:View
 
 
     override fun onAttach(context: Context) {

@@ -3,8 +3,7 @@ package com.easy.view.base
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import butterknife.ButterKnife
-import butterknife.Unbinder
+import androidx.viewbinding.ViewBinding
 
 /**
  * Created by shishoufeng on 2020/9/5.
@@ -14,23 +13,24 @@ import butterknife.Unbinder
  *
  *
  */
-abstract class BaseEasyActivity : AppCompatActivity(),View.OnClickListener {
+abstract class BaseEasyActivity<Bind : ViewBinding> : AppCompatActivity(), View.OnClickListener {
 
     protected val LOG_TAG: String = this.javaClass.simpleName
 
-    private  var unBinder : Unbinder? = null
+    protected open val binding: Bind? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(getLayoutId())
-
-        unBinder = ButterKnife.bind(this)
+        if (binding == null){
+            setContentView(getLayoutId())
+        }else{
+            setContentView(binding?.root)
+        }
 
         initView()
     }
 
-
-    abstract fun getLayoutId(): Int
+    open fun getLayoutId(): Int = 0
 
     abstract fun initView()
 
@@ -39,14 +39,12 @@ abstract class BaseEasyActivity : AppCompatActivity(),View.OnClickListener {
         onViewsClick(v?.id)
     }
 
-    open fun onViewsClick(id: Int?){
-        
+    open fun onViewsClick(id: Int?) {
+
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        unBinder?.unbind()
-
 
     }
 

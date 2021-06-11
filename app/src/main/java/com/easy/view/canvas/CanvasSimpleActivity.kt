@@ -1,9 +1,8 @@
 package com.easy.view.canvas
 
 import android.graphics.Color
-import com.easy.view.R
 import com.easy.view.base.BaseEasyActivity
-import kotlinx.android.synthetic.main.activity_canvas_simple.*
+import com.easy.view.databinding.ActivityCanvasSimpleBinding
 import java.util.*
 
 /**
@@ -13,22 +12,29 @@ import java.util.*
  * desc: 简单示例画布view
  *
  */
-class CanvasSimpleActivity:BaseEasyActivity() {
+class CanvasSimpleActivity : BaseEasyActivity<ActivityCanvasSimpleBinding>() {
 
 
-    override fun getLayoutId(): Int {
-        return R.layout.activity_canvas_simple
-    }
+    override val binding: ActivityCanvasSimpleBinding
+        get() = ActivityCanvasSimpleBinding.inflate(layoutInflater)
 
     override fun initView() {
 
-        val colors = arrayOf(Color.BLACK,Color.BLUE,Color.CYAN,Color.DKGRAY,Color.RED,Color.YELLOW,Color.MAGENTA)
+        val colors = arrayOf(
+            Color.BLACK,
+            Color.BLUE,
+            Color.CYAN,
+            Color.DKGRAY,
+            Color.RED,
+            Color.YELLOW,
+            Color.MAGENTA
+        )
         val random = Random()
 
-        btnSwitchBgColor.setOnClickListener {
+        binding.btnSwitchBgColor.setOnClickListener {
             val colorId = random.nextInt(colors.size)
 
-            circleExSimple.bgColor = colors[colorId]
+            binding.circleExSimple.bgColor = colors[colorId]
         }
 
     }

@@ -1,11 +1,9 @@
 package com.easy.view.lifecycle.simple
 
 import androidx.activity.viewModels
-import androidx.lifecycle.observe
-import com.easy.view.R
 import com.easy.view.base.BaseEasyActivity
+import com.easy.view.databinding.ActivitySimpleLifecycleBinding
 import com.easy.view.lifecycle.simple.vm.LifecycleSimpleViewModel
-import kotlinx.android.synthetic.main.activity_simple_lifecycle.*
 
 /**
  * Created by shishoufeng on 2020/12/26.
@@ -15,20 +13,19 @@ import kotlinx.android.synthetic.main.activity_simple_lifecycle.*
  *
  *
  */
-class LifecycleSimpleActivity : BaseEasyActivity() {
+class LifecycleSimpleActivity : BaseEasyActivity<ActivitySimpleLifecycleBinding>() {
+
+    override val binding: ActivitySimpleLifecycleBinding
+        get() = ActivitySimpleLifecycleBinding.inflate(layoutInflater)
 
     private val viewModel by viewModels<LifecycleSimpleViewModel>()
 
 
-    override fun getLayoutId(): Int {
-        return R.layout.activity_simple_lifecycle
-    }
-
     override fun initView() {
         viewModel.RepositoriesNameListLiveData.observe(this) {
-            listContentView?.setData(it)
+            binding.listContentView.setData(it)
         }
-        btnSendReqGithub?.setOnClickListener {
+        binding.btnSendReqGithub.setOnClickListener {
             viewModel.requestMyGitHubRepositories()
         }
 

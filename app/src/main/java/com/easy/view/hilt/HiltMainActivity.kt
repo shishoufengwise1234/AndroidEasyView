@@ -1,10 +1,9 @@
 package com.easy.view.hilt
 
-import com.easy.view.R
 import com.easy.view.base.BaseEasyActivity
 import com.easy.view.bean.HiltText
+import com.easy.view.databinding.ActivityHiltMainBinding
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.activity_hilt_main.*
 import javax.inject.Inject
 
 /**
@@ -14,15 +13,14 @@ import javax.inject.Inject
  * desc: hilt注入框架demo
  */
 @AndroidEntryPoint
-class HiltMainActivity: BaseEasyActivity() {
+class HiltMainActivity: BaseEasyActivity<ActivityHiltMainBinding>() {
 
     @Inject lateinit var hiltText: HiltText
 
-    override fun getLayoutId(): Int {
-        return R.layout.activity_hilt_main
-    }
+    override val binding: ActivityHiltMainBinding
+        get() = ActivityHiltMainBinding.inflate(layoutInflater)
 
     override fun initView() {
-        tvHiltContent.text = "id = ${hiltText.id} , text = ${hiltText.text}"
+        binding.tvHiltContent.text = "id = ${hiltText.id} , text = ${hiltText.text}"
     }
 }
