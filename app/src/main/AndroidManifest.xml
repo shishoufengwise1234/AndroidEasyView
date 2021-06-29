@@ -92,6 +92,10 @@
             android:label="@string/label_currency"
             android:screenOrientation="sensor"
             />
+        <activity android:name=".others.AspectTestActivity"
+            android:label="@string/label_currency"
+            android:screenOrientation="sensor"
+            />
 
 
 

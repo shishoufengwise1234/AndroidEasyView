@@ -2,7 +2,9 @@ package com.easy.view
 
 import android.app.Activity
 import android.app.Application
+import android.content.Context
 import android.os.Bundle
+import androidx.multidex.MultiDex
 import com.easy.view.utils.EASY_VIEW_TAG
 import com.orhanobut.logger.*
 import dagger.hilt.android.HiltAndroidApp
@@ -17,6 +19,11 @@ import java.lang.NullPointerException
  */
 @HiltAndroidApp
 class EasyApplication : Application() {
+
+    override fun attachBaseContext(base: Context) {
+        super.attachBaseContext(base)
+        MultiDex.install(this)
+    }
 
     override fun onCreate() {
         super.onCreate()

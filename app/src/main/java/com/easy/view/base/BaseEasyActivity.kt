@@ -22,7 +22,10 @@ abstract class BaseEasyActivity<Bind : ViewBinding> : AppCompatActivity(), View.
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (binding == null){
-            setContentView(getLayoutId())
+            val layoutId = getLayoutId()
+            if (layoutId != 0) {
+                setContentView(layoutId)
+            }
         }else{
             setContentView(binding?.root)
         }

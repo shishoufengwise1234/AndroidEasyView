@@ -1,22 +1,24 @@
-// aspectj-configure-lib.gradle
-
-
-buildscript {
-    repositories {
-        mavenCentral()
-    }
-    dependencies {
-        classpath 'org.aspectj:aspectjtools:1.9.6'
-        classpath 'org.aspectj:aspectjweaver:1.9.6'
-    }
-}
-
-repositories {
-    mavenCentral()
-}
-
-
-//android.libraryVariants.all { variant ->
+//// aspectj-configure-app.gradle
+//import org.aspectj.bridge.IMessage
+//import org.aspectj.bridge.MessageHandler
+//import org.aspectj.tools.ajc.Main
+//
+//buildscript {
+//    repositories {
+//        google()
+//        jcenter()
+//        mavenCentral()
+//    }
+//    dependencies {
+//        classpath "org.aspectj:aspectjtools:1.9.6"
+//        classpath "org.aspectj:aspectjweaver:1.9.6"
+//    }
+//}
+//
+//final def log = project.logger
+//final def variants = project.android.applicationVariants
+//
+//variants.all { variant ->
 //    if (variant.buildType.isDebuggable()) {
 ////        return;   //开放后debug模式不生效
 //    }
@@ -28,13 +30,11 @@ repositories {
 //                         "-aspectpath", javaCompile.classpath.asPath,
 //                         "-d", javaCompile.destinationDir.toString(),
 //                         "-classpath", javaCompile.classpath.asPath,
-//                         "-bootclasspath", android.bootClasspath.join(
-//                File.pathSeparator)]
+//                         "-bootclasspath", project.android.bootClasspath.join(File.pathSeparator)]
+//        //log.debug "ajc args: " + Arrays.toString(args)
 //
 //        MessageHandler handler = new MessageHandler(true)
 //        new Main().run(args, handler)
-//
-//        def log = project.logger
 //        for (IMessage message : handler.getMessages(null, true)) {
 //            switch (message.getKind()) {
 //                case IMessage.ABORT:
@@ -43,6 +43,8 @@ repositories {
 //                    log.error message.message, message.thrown
 //                    break
 //                case IMessage.WARNING:
+//                    log.warn message.message, message.thrown
+//                    break
 //                case IMessage.INFO:
 //                    log.info message.message, message.thrown
 //                    break
@@ -53,4 +55,4 @@ repositories {
 //        }
 //    }
 //}
-
+//

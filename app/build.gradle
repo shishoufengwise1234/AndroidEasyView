@@ -6,6 +6,8 @@ apply plugin: 'kotlin-kapt'
 
 apply plugin: 'dagger.hilt.android.plugin'
 
+apply plugin: 'android-aspectjx'
+
 
 android {
     compileSdkVersion 30
@@ -19,10 +21,15 @@ android {
         versionCode 1
         versionName "1.0"
 
+        multiDexEnabled true
+
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
+
     }
 
     buildTypes {
+        debug{
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
@@ -69,8 +76,14 @@ android {
 //    }
 }
 
+//aspectjx {
+//    enabled true
+//    exclude 'com.google','com.taobao'
+//}
+
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
+
 
     def lifecycle_version = "2.3.1"
     def arch_version = "2.1.0"
@@ -118,6 +131,8 @@ dependencies {
     //Collection 扩展程序包含在 Android 的节省内存的集合库中使用的效用函数，包括 ArrayMap、LongParseArray、LruCache 等等。
     implementation "androidx.collection:collection-ktx:1.1.0"
 
+    implementation 'androidx.multidex:multidex:2.0.1'
+
     //Fragment KTX 模块提供了一系列扩展程序以简化 Fragment API。
 //    implementation "androidx.fragment:fragment-ktx:1.2.5"
 
@@ -154,7 +169,7 @@ dependencies {
     implementation 'com.blankj:utilcodex:1.29.0'
 
     implementation 'com.github.bumptech.glide:glide:4.12.0'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
+    kapt 'com.github.bumptech.glide:compiler:4.12.0'
 
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
 //    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
@@ -167,7 +182,7 @@ dependencies {
     implementation "com.squareup.okhttp3:logging-interceptor"
 
 
-//    implementation project(":lib-aop")
+//    api 'org.aspectj:aspectjrt:1.9.6'
 
 
 

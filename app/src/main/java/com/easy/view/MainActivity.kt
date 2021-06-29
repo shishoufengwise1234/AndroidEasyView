@@ -24,6 +24,7 @@ import com.easy.view.canvas.CanvasSimpleActivity
 import com.easy.view.databinding.ActivityMainBinding
 import com.easy.view.hilt.HiltMainActivity
 import com.easy.view.lifecycle.MainLifecycleActivity
+import com.easy.view.others.AspectTestActivity
 import com.easy.view.scope.ScopeMainActivity
 import com.easy.view.sp.SpAnrTestActivity
 import com.google.android.material.textview.MaterialTextView
@@ -133,6 +134,7 @@ class MainActivity : AppCompatActivity(), OnItemClickListener {
             list.add(StringItemBean(80, "JetPack Compose组件 (环境目前不支持)"))
             list.add(StringItemBean(90, "Glide加载图片测试 "))
             list.add(StringItemBean(91, "8.0以下SP ANR 问题测试"))
+            list.add(StringItemBean(92, "Aspect测试"))
 
             return list
         }
@@ -156,6 +158,7 @@ class MainActivity : AppCompatActivity(), OnItemClickListener {
             79 -> HiltMainActivity::class.java
             90 -> GlideTestActivity::class.java
             91 -> SpAnrTestActivity::class.java
+            92 -> AspectTestActivity::class.java
 
             else -> EmptyActivity::class.java
         }
