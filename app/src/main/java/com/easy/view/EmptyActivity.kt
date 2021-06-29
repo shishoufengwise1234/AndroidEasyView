@@ -13,6 +13,8 @@ import com.easy.view.databinding.LayoutCommonEmptyBinding
  */
 class EmptyActivity : BaseEasyActivity<LayoutCommonEmptyBinding>() {
 
+    override val binding: LayoutCommonEmptyBinding
+        get() = LayoutCommonEmptyBinding.inflate(layoutInflater)
 
     override fun initView() {}
 
