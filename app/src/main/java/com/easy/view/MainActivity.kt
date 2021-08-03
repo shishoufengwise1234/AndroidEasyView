@@ -1,8 +1,11 @@
 package com.easy.view
 
+import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
+import android.os.Build
 import android.os.Bundle
+import android.telephony.TelephonyManager
 import android.util.Log
 import android.view.View
 import android.widget.LinearLayout
@@ -65,6 +68,44 @@ class MainActivity : AppCompatActivity(), OnItemClickListener {
         //注册监听前后台切换
         ProcessLifecycleOwner.get().lifecycle.addObserver(ApplicationObserver())
 
+
+    }
+
+    private fun getCountry() {
+        println(Locale.getDefault().country)
+        try {
+            val tm = getSystemService(TELEPHONY_SERVICE) as? TelephonyManager
+            println("simCountryIso = "+tm?.simCountryIso)
+            println("networkOperatorName = "+tm?.networkOperatorName)
+        } catch (e: java.lang.Exception) {
+        }
+        val locale: String = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            resources.configuration.locales.get(0).country
+        } else {
+            "null"
+        }
+        println(locale)
+
+        println("getUserCountry = "+getUserCountry())
+
+
+    }
+
+    fun getUserCountry(): String? {
+        try {
+            val tm = getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
+            val simCountry = tm.simCountryIso
+            if (simCountry != null && simCountry.length == 2) { // SIM country code is available
+                return simCountry.toLowerCase(Locale.US)
+            } else if (tm.phoneType != TelephonyManager.PHONE_TYPE_CDMA) { // device is not 3G (would be unreliable)
+                val networkCountry = tm.networkCountryIso
+                if (networkCountry != null && networkCountry.length == 2) { // network country code is available
+                    return networkCountry.toLowerCase(Locale.US)
+                }
+            }
+        } catch (e: java.lang.Exception) {
+        }
+        return null
     }
 
     override fun getLastNonConfigurationInstance(): Any? {
@@ -90,6 +131,7 @@ class MainActivity : AppCompatActivity(), OnItemClickListener {
         @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
         fun onResumed(){
             Log.d(TAG, "onResumed: 活跃中...")
+
         }
 
         @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
@@ -104,6 +146,8 @@ class MainActivity : AppCompatActivity(), OnItemClickListener {
         }catch (e: Exception){
             e.printStackTrace()
         }
+        getCountry()
+
     }
 
     private val mainItemList: List<StringItemBean>

@@ -6,7 +6,7 @@ apply plugin: 'kotlin-kapt'
 
 apply plugin: 'dagger.hilt.android.plugin'
 
-apply plugin: 'android-aspectjx'
+//apply plugin: 'android-aspectjx'
 
 
 android {
@@ -54,6 +54,13 @@ android {
 
     buildFeatures {
         viewBinding true
+    }
+
+    lintOptions {
+        checkReleaseBuilds false
+        // Or, if you prefer, you can continue to check for errors in release builds,
+        // but continue the build even when errors are found:
+        abortOnError false
     }
 
 
@@ -182,7 +189,7 @@ dependencies {
     implementation "com.squareup.okhttp3:logging-interceptor"
 
 
-//    api 'org.aspectj:aspectjrt:1.9.6'
+    api 'org.aspectj:aspectjrt:1.9.6'
 
 
 

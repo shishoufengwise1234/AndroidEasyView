@@ -1,2 +1,104 @@
 include ':app'
 //include ':lib-aop'
+
+def TAG = "BuildListener"
+
+//gradle构建过程监听
+gradle.addBuildListener(new BuildListener() {
+
+    @Override
+    void buildStarted(Gradle gradle) {
+        println(TAG + " : buildStarted")
+
+    }
+
+    //执行评估 此时还没有初始化
+    @Override
+    void settingsEvaluated(Settings settings) {
+        println(TAG + " : settingsEvaluated")
+        println("rootDir = "+settings.getRootDir().getAbsolutePath())
+        println("SettingsDir = " + settings.getSettingsDir().getAbsolutePath())
+
+    }
+
+    //初始化过程结束
+    @Override
+    void projectsLoaded(Gradle gradle) {
+        println(TAG + " : projectsLoaded")
+
+    }
+
+    //配置阶段结束
+    @Override
+    void projectsEvaluated(Gradle gradle) {
+        println(TAG + " : projectsEvaluated")
+
+    }
+
+    @Override
+    void buildFinished(BuildResult result) {
+        println(TAG + " : buildFinished")
+
+    }
+})
+
+//获取执行阶段的时间
+
+//开始构建settings 时间
+def beginOfSettingTime = System.currentTimeMillis()
+
+gradle.projectsLoaded {
+    println("初始化阶段耗时 : ${System.currentTimeMillis() - beginOfSettingTime} ms")
+}
+
+//是否开始配置
+def isBeginOfConfig = false
+def beginOfConfigTime
+def configTimeMap = new HashMap()
+
+gradle.beforeProject { project ->
+    if (!isBeginOfConfig){
+        isBeginOfConfig = true
+        beginOfConfigTime = System.currentTimeMillis()
+    }
+    configTimeMap.put(project,System.currentTimeMillis())
+}
+
+gradle.afterProject { project ->
+    def time = configTimeMap.get(project)
+    println("配置阶段 "+project + " 耗时 ： ${System.currentTimeMillis() - time} ms")
+}
+
+def beginOfProjectExecuteTime
+gradle.taskGraph.whenReady {
+    println "配置阶段 耗时 ： "+(System.currentTimeMillis() - beginOfConfigTime) + " ms"
+    beginOfProjectExecuteTime = System.currentTimeMillis()
+}
+
+gradle.taskGraph.beforeTask { task ->
+    task.doFirst {
+        task.ext.beginOfTask = System.currentTimeMillis()
+    }
+    task.doLast {
+        println '执行阶段，' + task + '耗时：' + (System.currentTimeMillis() - task.beginOfTask) + 'ms'
+    }
+}
+
+gradle.buildFinished {
+    println "执行完成 , 耗时 ： "+(System.currentTimeMillis() - beginOfProjectExecuteTime) + " ms"
+}
+
+//属性
+def getExtraPropertyValue(){
+    Properties properties = new Properties()
+    def file = file(rootDir.getAbsolutePath() + "/local.properties")
+    properties.load(file.newDataInputStream())
+
+    //添加额外属性
+    gradle.ext.api = properties.getProperty("sdkDesc")
+
+    println gradle.api
+}
+
+getExtraPropertyValue()
+
